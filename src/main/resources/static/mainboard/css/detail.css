@@ -2,7 +2,7 @@
 * {box-sizing: border-box}
 body {font-family: Verdana, sans-serif; margin:0}
 .mySlides {display: none}
-img {vertical-align: middle;}
+/*img {vertical-align: middle;}*/
 
 /* Slideshow container */
 .slideshow-container {
@@ -272,7 +272,10 @@ a {
 a:visited {
     color : black;
 }
-
+.text-center {
+    margin-top: 15px;
+    margin-bottom: 22px;
+}
 
 /*
 .item_name{
