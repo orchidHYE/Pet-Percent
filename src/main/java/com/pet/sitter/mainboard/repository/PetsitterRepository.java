@@ -47,8 +47,6 @@ public interface PetsitterRepository extends JpaRepository<Petsitter, Long>, Jpa
     @Query ("update Petsitter p set p.likeCnt = p.likeCnt + 1 where p.sitterNo = :sitterNo")
     int updateLike (@Param("sitterNo") Long sitterNo);
 
-/*    //제목으로 검색
-    List<Petsitter> findByPetTitleContaining (String keyword);*/
 
     //제목 페이징 정렬검색
     Page<Petsitter> findByPetTitleContaining (Pageable pageable, String keyword);

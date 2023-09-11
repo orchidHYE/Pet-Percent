@@ -155,6 +155,7 @@ public class MainBoardController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한이 없습니다.");
         }
 
+        writeForm.setBoardFile(petSitterDTO.getBoardFile());
         writeForm.setPetTitle(petSitterDTO.getPetTitle());
         writeForm.setPetContent(petSitterDTO.getPetContent());
         writeForm.setCategory(petSitterDTO.getCategory());
