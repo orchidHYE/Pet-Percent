@@ -1,8 +1,9 @@
-<html layout:decorate="~{layout}" class="container my-3" xmlns="http://www.w3.org/1999/html">
+
+<html layout:decorate="~{layout}" class="container my-3">
 <div layout:fragment="content">
     <link rel="stylesheet" type="text/css" th:href="@{/qna/css/questionForm.css}">
     <div class="container">
-        <h2>Q&A게시판</h2>
+        <div class="h2">Q&A게시판</div>
         <div class="row row1 ">
             <table class="table ">
                 <tr>
@@ -84,7 +85,7 @@
                 </a>
                 <!-- 답변 삭제 -->
                 <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"
-                   class="btn btn-modify-custom btn-outline-secondary " sec:authorize="isAuthenticated()"
+                   class="btn btn-modify-custom btn-outline-secondary delete" sec:authorize="isAuthenticated()"
                    th:if="${answer.member.memberId != null and #authentication.getPrincipal().getUsername == answer.member.memberId}"
                    th:text="삭제">
                 </a>
