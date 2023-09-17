@@ -89,9 +89,8 @@
             </form>
             <span class="titleSearchForm">
     <span class="search_text">Search</span>
-    <form id="titleSearchForm" th:action="@{/mainboard/titleSearch}" method="get" class="form_content"
-          onsubmit="return validateForm()">
-        <input type="search" placeholder="제목을 검색하세요." th:name="keyword" class="titleSearchInput" id="keywordInput">
+    <form id="titleSearchForm" th:action="@{/mainboard/titleSearch}" method="get" class="form_content">
+        <input type="search" placeholder="제목을 검색하세요." th:name="keyword" class="titleSearchInput">
         <input type="submit" value="검색">
     </form>
     </span>
@@ -116,7 +115,10 @@
                         <div th:data-sitterno="${petSitter.sitterNo}"></div>
                         <div class="item-address" th:text="${petSitter.petAddress}"></div>
                         <div class="item_cost" th:if="${petSitter.price!=0}" th:text="${petSitter.price}+원"></div>
-                        <div class="item_place" th:if="${petSitter.price==0}" th:text="협의가능"></div>
+                        <div class="item_cost" th:if="${petSitter.price==0}" th:text="협의가능"></div>
+                        <div class="item_like"><span class="material-symbols-outlined"><img
+                                src="/mainboard/image/favorite.png"/></span><span
+                                th:text="관심 +${petSitter.likeCnt}"></span></div>
                     </div>
                 </a>
             </th:block>
@@ -201,30 +203,26 @@
                 },
                 success: function (data) {
                     console.log(data);
-                    alert("성공 : " + data.content);
                     let searchRes = $("#petSitterContainer");
                     searchRes.empty();
                     var htmlList = "";
 
                     makePagination(data, pno, searchObj);
 
-                    data.content.forEach(function (content) {
-                        if (data.content.length === 0 || data.content.length === null) {
-                            htmlList += `<h2>등록된 게시글이 없습니다.</h2>`;
-                            $("#noting").html(htmlList);
-                        } else {
+
+                    if (!data.content || data.content.length === 0) {
+                        htmlList += `<div class="content_nothing">등록된 게시글이 없습니다.</div>`;
+                    } else {
+                        data.content.forEach(function (content) {
                             htmlList += `<a href="/mainboard/detail/` + content.sitterNo + `" style="text-decoration: none; color: black;">
                                  <div class="petSitterItem">
-                                 <div class="thumbnail-crop" >
-                                 <div class="text-left">`;
+                                 <div class="thumbnail-crop" >`;
                             if (content === null || content.fileDTOList === null || content.fileDTOList.length === 0) {
                                 htmlList += `<img class="tem_thumbnail" alt="petSitter" id="temp_thumbnail" src="/mainboard/image/logo.png" />`;
                             } else {
                                 htmlList += `<img class="thumbnail" alt="petSitter" id="user_thumbnail" src="/image/mainboard/` + content.fileDTOList[0].newFileName + `" />`;
                             }
                             htmlList += `</div>
-                                     </div>
-                                     </div>
                                      <div class="item_name">` + content.petTitle + `</div>`;
                             htmlList += `<div class="item-address">` + content.petAddress + `</div>`;
                             if (content.price !== 0) {
@@ -232,9 +230,10 @@
                             } else {
                                 htmlList += `<div class="item_place">협의가능</div>`;
                             }
-                            htmlList += `</a>`;
-                        }
-                    });
+                            htmlList += `<div class="item_like"><span class="material-symbols-outlined"><img src="/mainboard/image/favorite.png" /></span><span>관심 ` + content.likeCnt + `</span></div>`;
+                            htmlList += `</div></a>`;
+                        });
+                    }
                     $("#petSitterContainer").html(htmlList);
                 },
                 error: function (jqXHR, textStatus) {
@@ -296,19 +295,6 @@
             $(".page-nav").click(function () {
                 search(searchObj, $(this).data('pno'));
             });
-        }
-    </script>
-    <script>
-        function validateForm() {
-            var keywordInput = document.getElementById("keywordInput");
-            var keywordValue = keywordInput.value.trim(); // 입력값 앞뒤 공백 제거
-
-            if (keywordValue === "") {
-                alert("키워드를 입력하세요.");
-                return false; // 제출을 막음
-            }
-
-            return true; // 제출을 허용
         }
     </script>
 </div>

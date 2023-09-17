@@ -86,11 +86,10 @@
                 <input type="button" value="검색" id="subBtn" name="subBtn"/>
             </label>
         </span>
-            </form>
-            <span class="titleSearchForm">
+      </form>
+      <span class="titleSearchForm">
     <span class="search_text">Search</span>
-    <form id="titleSearchForm" th:action="@{/mainboard/titleSearch}" method="get" class="form_content"
-          onsubmit="return validateForm()">
+    <form id="titleSearchForm" th:action="@{/mainboard/titleSearch}" method="get" class="form_content" onsubmit="return validateForm()">
         <input type="search" placeholder="제목을 검색하세요." th:name="keyword" class="titleSearchInput" id="keywordInput">
         <input type="submit" value="검색">
     </form>
