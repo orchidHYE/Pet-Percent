@@ -207,71 +207,6 @@
         let sitterAddress = $("#petAddress").text();
         let sitterNoValue = $("#no").attr("data-sitterno");
 
-<<<<<<< HEAD
-            $.ajax({
-                url: "/mainboard/recommend",
-                type: "POST",
-                data: {
-                    category : category,
-                    petCategory : petCategory,
-                    sitterAddress : sitterAddress,
-                    sitterNoValue : sitterNoValue
-                },
-                dataType: "json",
-                beforeSend : function(xhr) {
-                    xhr.setRequestHeader(header, token);
-                },
-                success: function(data) {
-                    console.log(data);
-                    let recommendRes = $("#recommend");
-                    recommendRes.empty();
-                    var htmlList = "";
-                    data.content.forEach(function (content){
-                        if (data.content.length === 0 || data.content.length === null) {
-                            htmlList += `<div>관련 게시글이 없습니다.</div>`;
-                            $("#noting").html(htmlList);
-                        } else {
-                            htmlList += `<a href="/mainboard/detail/`+content.sitterNo+`">
-                             <div class="petSitterItem">
-                             <div class="thumbnail-crop" >`;
-                            if(content === null || content.fileDTOList === null || content.fileDTOList.length === 0) {
-                                htmlList += `<img class="tem_thumbnail" alt="petSitter" id="temp_thumbnail" src="/mainboard/image/tem_img.png" />`;
-                            } else {
-                                htmlList += `<img class="thumbnail" alt="petSitter" id="user_thumbnail" src="/image/mainboard/`+content.fileDTOList[0].newFileName+`" />`;
-                            }
-                            htmlList += `</div>
-                                 <div class="text-left">
-                                 <div class="item_name">`+content.petTitle+`</div>`;
-                            htmlList += `<div class="item_place">`+content.petAddress+`</div>`;
-                            if(content.price !== 0) {
-                                htmlList += `<div class="item_cost">`+content.price+`</div>`;
-                            } else {
-                                htmlList += `<div class="item_cost">협의가능</div>`;
-                            }
-                            htmlList += `</div></div></a>`;
-                        }
-                    });
-                    $("#recommend").html(htmlList);
-                },
-                error: function(error) {
-                    console.error(error);
-                }
-            });
-        });
-    </script>
-<script>
-    //추천 버튼 클릭시 호출
-    const recElements = document.getElementsByClassName("recommend"); //클래스 이름
-    Array.from(recElements).forEach(function (element) {
-
-        element.addEventListener("click", function () {
-            if (confirm("추천하시겠습니까?")) { //confirm에서 확인 버튼을 누르면 true 값이 들어감
-                location.href = this.dataset.uri; //click 이벤트가 발생한 a요소의 data-uri 속성의 값을 가져와
-                                                  //location 객체의 href 속성의 값으로 적용해라 => 현재 browser의 주소를 변경해라
-                //location.href="/question/vote/${question.id}"; //삭제요청
-                //location.href="/answer/vote/${answer.id}"; //삭제요청
-
-=======
         $.ajax({
             url: "/mainboard/recommend",
             type: "POST",
@@ -319,7 +254,6 @@
             },
             error: function(error) {
                 console.error(error);
->>>>>>> 310471888f45a8126dfb2738ffb4e890751f0881
             }
         });
     });
