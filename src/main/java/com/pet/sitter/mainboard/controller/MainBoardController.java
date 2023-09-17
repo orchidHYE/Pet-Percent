@@ -209,7 +209,7 @@ public class MainBoardController {
         mainBoardService.incrementLikes(sitterNo);
         return String.format("redirect:/mainboard/detail/{sitterNo}", sitterNo);
     }
-    
+
     //제목으로 검색
     @RequestMapping(value = "/titleSearch", method = RequestMethod.GET)
     public String titleSearch(@RequestParam String keyword,

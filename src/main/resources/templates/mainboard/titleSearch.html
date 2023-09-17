@@ -54,17 +54,17 @@
             <!-- 삼항 연산자 => 조건 ? true false -->
             <li class="page-item" th:classappend="${!petSitterPage.hasPrevious} ? 'disabled'">
                 <!-- Page class의 hasPrevious() : 이전 페이지의 여부 / getNumber : 현재 페이지 번호-->
-                <a class="page-link" th:href="@{|?page=${petSitterPage.number-1}|}"><span>이전</span></a>
+                <a class="page-link" th:href="@{|?page=${petSitterPage.number-1}&keyword=${keyword}|}"><span>이전</span></a>
             </li>
             <!-- 페이지번호 : 반복& <a>태그 연결 & 부트스트랩 [1] [2] [3] ~ [10] -->
             <!-- page : 반복변수명  / '?page=' : localhost:8090/question/list?page=페이지전호-->
             <li class="page-item" th:each="page : ${#numbers.sequence(0,petSitterPage.totalPages-1)}" th:if="${page>=petSitterPage.number-3 and page<=petSitterPage.number+3}" th:classappend="${page==petSitterPage.number} ? 'active'">
-                <a class="page-link" th:href="@{|?page=${page}|}" th:text="${page+1}"></a>
+                <a class="page-link" th:href="@{|?page=${page}&keyword=${keyword}|}" th:text="${page+1}"></a>
             </li>
             <!-- 다음 버튼 : 조건 충족시 노출 -->
             <li class="page-item" th:classappend="${!petSitterPage.hasNext} ? 'disabled'">
                 <!-- Page class의 hasPrevious() : 이전 페이지의 여부 / getNumber : 현재 페이지 번호-->
-                <a class="page-link" th:href="@{|?page=${petSitterPage.number+1}|}"><span>다음</span></a>
+                <a class="page-link" th:href="@{|?page=${petSitterPage.number+1}&keyword=${keyword}|}"><span>다음</span></a>
             </li>
         </ul>
     </div>

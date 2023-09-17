@@ -257,7 +257,7 @@ public class MainBoardService {
 
 
 
-    //************************************************혜지시작
+
     //글작성
     public void write(PetSitterDTO petSitterDTO, String id, MultipartFile[] boardFile) throws IOException {
         logger.info("MainBoardService-write()진입");
