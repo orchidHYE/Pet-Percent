@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pet.sitter.common.entity.Petsitter;
 import com.pet.sitter.mainboard.dto.PetSitterDTO;
+import com.pet.sitter.mainboard.dto.WeekDTO;
 import com.pet.sitter.mainboard.service.MainBoardService;
 import com.pet.sitter.mainboard.validation.WriteForm;
 import com.pet.sitter.member.service.MemberService;
@@ -146,6 +147,7 @@ public class MainBoardController {
 
         PetSitterDTO petSitterDTO = mainBoardService.getDetail(sitterNo);
 
+
         // 글 작성자와 로그인한 유저가 동일하지 않으면 수정 권한이 없음
         if (!petSitterDTO.getMember().getMemberId().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한이 없습니다.");
@@ -160,6 +162,7 @@ public class MainBoardController {
         writeForm.setStartTime(petSitterDTO.getStartTime());
         writeForm.setEndTime(petSitterDTO.getEndTime());
         writeForm.setPetAddress(petSitterDTO.getPetAddress());
+        writeForm.setWeekList(writeForm.getWeekList());
 
         model.addAttribute("writeForm", writeForm);
         return "mainboard/updateForm";
@@ -206,26 +209,16 @@ public class MainBoardController {
         mainBoardService.incrementLikes(sitterNo);
         return String.format("redirect:/mainboard/detail/{sitterNo}", sitterNo);
     }
-
-
+    
     //제목으로 검색
-    @GetMapping("/titleSearch")
-    public String titleSearch () {
-        return "mainboard/titleSearch";
-    }
-
-    //제목으로 검색
-    @RequestMapping(value = "/titleSearch", method = {RequestMethod.GET, RequestMethod.POST})
-    public String titleSearch (@RequestParam String keyword,
-                               @RequestParam(value = "page", defaultValue = "0") int page,
-                               Model model) {
+    @RequestMapping(value = "/titleSearch", method = RequestMethod.GET)
+    public String titleSearch(@RequestParam String keyword,
+                              @RequestParam(value = "page", defaultValue = "0") int page,
+                              Model model) {
         Page<PetSitterDTO> petSitterDTOPage = mainBoardService.titleSearch(keyword, page);
-        //List<PetSitterDTO> petSitterDTOList = petSitterDTOPage.getContent();
-
-        model.addAttribute("petSitterPage",petSitterDTOPage);
-        model.addAttribute(keyword);
-        //model.addAttribute("",petSitterDTOList);
-
-        return "mainboard/list";
+        model.addAttribute("petSitterPage", petSitterDTOPage);
+        model.addAttribute("keyword", keyword);
+        return "mainboard/titleSearchList";
     }
+
 }
