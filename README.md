@@ -1,5 +1,6 @@
 # 🐕 PET%
-<img width="416" alt="image" src="https://github.com/orchidHYE/New_petsitter/assets/131605360/9c719b33-5edf-41a7-a472-06aa235228e7">
+![image](https://github.com/orchidHYE/Pet-Percent/assets/131605360/76b83275-aecb-4e24-8db2-8a6754ce463a)
+
 
 
 # 프로젝트 소개
@@ -26,11 +27,13 @@
 
 **상세일정**
 
-<img width="460" alt="image" src="https://github.com/orchidHYE/New_petsitter/assets/131605360/978293ea-e9d8-46f5-b14f-3411ec5463f7">
+<img width="963" alt="image" src="https://github.com/orchidHYE/Pet-Percent/assets/131605360/d876688c-328a-4ebc-960b-84b46c915f0d">
+
 
 
 # 4. ERD
-![image](https://github.com/orchidHYE/New_petsitter/assets/131605360/d0f30cb6-5047-46b4-8069-a63ebfcc0987)
+<img width="791" alt="image" src="https://github.com/orchidHYE/Pet-Percent/assets/131605360/06dc759f-ac84-4071-b802-792a40a2f79a">
+
 
 # 5. 기능
 ###  👤 사용자
